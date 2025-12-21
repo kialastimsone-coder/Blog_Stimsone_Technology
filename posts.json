@@ -3,21 +3,7 @@
     "id": "blog-minimaliste",
     "title": "Créer un blog minimaliste",
     "date": "2025-12-10",
-    "excerpt": "Créer un blog élégant avec HTML, CSS et JS.",
-    "content": "<p>Un blog minimaliste se concentre sur l’essentiel.</p><p>GitHub Pages est parfait pour cela.</p>"
-  },
-  {
-    "id": "simplicite",
-    "title": "Pourquoi la simplicité est puissante",
-    "date": "2025-12-05",
-    "excerpt": "Moins de bruit, plus d’impact.",
-    "content": "<p>Le minimalisme améliore la lisibilité et la concentration.</p>"
-  },
-  {
-    "id": "technologie",
-    "title": "La technologie en 2026",
-    "date": "2025-12-05",
-    "excerpt": "Le monde d'aujourd'hui",
-    "content": "<p>Apprendre le numérique vous ouvre des portes</p>"
+    "excerpt": "Créer un blog élégant avec HTML, CSS et JavaScript.",
+    "content": "<p>Un blog minimaliste se concentre sur l’essentiel.</p><p>GitHub Pages est idéal pour héberger ce type de site.</p>"
   }
 ]
