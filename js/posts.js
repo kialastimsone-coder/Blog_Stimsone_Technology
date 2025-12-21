@@ -1,68 +1,71 @@
-let allPosts = [];
+document.addEventListener("DOMContentLoaded", () => {
+  const postsContainer = document.querySelector(".posts");
+  const articleContainer = document.querySelector(".article");
+  const titleEl = document.querySelector("h1");
+  const dateEl = document.querySelector(".date");
 
-fetch("posts.json")
-  .then(res => res.json())
-  .then(posts => {
-    allPosts = posts;
-    renderPosts(posts);
-    loadArticle(posts);
-  });
+  fetch("./posts.json")
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Impossible de charger posts.json");
+      }
+      return response.json();
+    })
+    .then(posts => {
 
-function renderPosts(posts) {
-  const container = document.querySelector(".posts");
-  if (!container) return;
+      /* ==========================
+         PAGE INDEX (liste)
+      ========================== */
+      if (postsContainer) {
+        postsContainer.innerHTML = "";
 
-  container.innerHTML = "";
+        posts.forEach(post => {
+          const article = document.createElement("article");
+          article.className = "post-preview fade";
 
-  posts.forEach(post => {
-    container.innerHTML += `
-      <article class="post-preview fade">
-        <h2>
-          <a href="article.html?id=${post.id}">${post.title}</a>
-        </h2>
-        <span class="date">${post.date}</span>
-        <p>${post.excerpt}</p>
-      </article>
-    `;
-  });
+          article.innerHTML = `
+            <h2>
+              <a href="article.html?id=${post.id}">
+                ${post.title}
+              </a>
+            </h2>
+            <span class="date">${post.date}</span>
+            <p>${post.excerpt}</p>
+          `;
 
-  observeFade();
-}
+          postsContainer.appendChild(article);
+        });
+      }
 
-function loadArticle(posts) {
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
-  if (!id) return;
+      /* ==========================
+         PAGE ARTICLE (détail)
+      ========================== */
+      if (articleContainer) {
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get("id");
 
-  const article = posts.find(p => p.id === id);
-  if (!article) return;
+        const post = posts.find(p => p.id === id);
 
-  document.querySelector("h1").textContent = article.title;
-  document.querySelector(".article").innerHTML = article.content;
-}
+        if (!post) {
+          articleContainer.innerHTML = "<p>Article introuvable.</p>";
+          return;
+        }
 
-// 🔍 Recherche
-const searchInput = document.getElementById("search");
-if (searchInput) {
-  searchInput.addEventListener("input", e => {
-    const value = e.target.value.toLowerCase();
-    const filtered = allPosts.filter(post =>
-      post.title.toLowerCase().includes(value) ||
-      post.excerpt.toLowerCase().includes(value)
-    );
-    renderPosts(filtered);
-  });
-}
+        titleEl.textContent = post.title;
+        dateEl.textContent = post.date;
+        articleContainer.innerHTML = post.content;
+      }
 
-// Animation scroll
-function observeFade() {
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
+    })
+    .catch(error => {
+      console.error("Erreur blog :", error);
+
+      if (postsContainer) {
+        postsContainer.innerHTML = "<p>Erreur de chargement des articles.</p>";
+      }
+
+      if (articleContainer) {
+        articleContainer.innerHTML = "<p>Erreur de chargement de l’article.</p>";
       }
     });
-  });
-
-  document.querySelectorAll(".fade").forEach(el => observer.observe(el));
-}
+});
