@@ -5,25 +5,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const dateEl = document.querySelector(".date");
 
   fetch("./posts.json")
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("Impossible de charger posts.json");
-      }
-      return response.json();
-    })
+    .then(res => res.json())
     .then(posts => {
 
-      /* ==========================
-         PAGE INDEX (liste)
-      ========================== */
+      /* ======================
+         PAGE INDEX
+      ====================== */
       if (postsContainer) {
         postsContainer.innerHTML = "";
 
         posts.forEach(post => {
-          const article = document.createElement("article");
-          article.className = "post-preview fade";
+          const el = document.createElement("article");
+          el.className = "post-preview fade";
 
-          article.innerHTML = `
+          el.innerHTML = `
             <h2>
               <a href="article.html?id=${post.id}">
                 ${post.title}
@@ -33,17 +28,19 @@ document.addEventListener("DOMContentLoaded", () => {
             <p>${post.excerpt}</p>
           `;
 
-          postsContainer.appendChild(article);
+          postsContainer.appendChild(el);
         });
+
+        // 🔥 ACTIVER LES ANIMATIONS APRÈS INSERTION
+        activateFade();
       }
 
-      /* ==========================
-         PAGE ARTICLE (détail)
-      ========================== */
+      /* ======================
+         PAGE ARTICLE
+      ====================== */
       if (articleContainer) {
         const params = new URLSearchParams(window.location.search);
         const id = params.get("id");
-
         const post = posts.find(p => p.id === id);
 
         if (!post) {
@@ -55,17 +52,24 @@ document.addEventListener("DOMContentLoaded", () => {
         dateEl.textContent = post.date;
         articleContainer.innerHTML = post.content;
       }
-
     })
-    .catch(error => {
-      console.error("Erreur blog :", error);
-
-      if (postsContainer) {
-        postsContainer.innerHTML = "<p>Erreur de chargement des articles.</p>";
-      }
-
-      if (articleContainer) {
-        articleContainer.innerHTML = "<p>Erreur de chargement de l’article.</p>";
-      }
+    .catch(err => {
+      console.error(err);
     });
 });
+
+/* ======================
+   OBSERVER SCROLL
+====================== */
+function activateFade() {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll(".fade").forEach(el => observer.observe(el));
+}
