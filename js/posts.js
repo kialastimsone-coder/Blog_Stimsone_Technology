@@ -16,7 +16,13 @@ document.addEventListener("DOMContentLoaded", () => {
       /* ========= PAGE INDEX ========= */
       if (postsContainer) {
         renderPosts(posts);
-
+          el.innerHTML = `
+            <img src="${post.image}" class="cover" alt="${post.title}">
+            <h2><a href="article.html?id=${post.id}">${post.title}</a></h2>
+            <span class="date">${post.date}</span>
+            <p>${post.excerpt}</p>
+          `;
+        
         if (searchInput) {
           searchInput.addEventListener("input", e => {
             const value = e.target.value.toLowerCase();
@@ -79,3 +85,4 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".fade").forEach(el => observer.observe(el));
   }
 });
+
