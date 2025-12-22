@@ -1,46 +1,37 @@
 document.addEventListener("DOMContentLoaded", () => {
+
   const postsContainer = document.querySelector(".posts");
   const articleContainer = document.querySelector(".article");
-  const titleEl = document.querySelector("h1");
+  const titleEl = document.querySelector(".header h1");
   const dateEl = document.querySelector(".date");
+  const searchInput = document.getElementById("search");
 
   fetch("./posts.json")
-    .then(res => res.json())
+    .then(res => {
+      if (!res.ok) throw new Error("posts.json introuvable");
+      return res.json();
+    })
     .then(posts => {
 
-      /* ======================
-         PAGE INDEX
-      ====================== */
+      /* ========= PAGE INDEX ========= */
       if (postsContainer) {
-        postsContainer.innerHTML = "";
+        renderPosts(posts);
 
-        posts.forEach(post => {
-          const el = document.createElement("article");
-          el.className = "post-preview fade";
-
-          el.innerHTML = `
-            <h2>
-              <a href="article.html?id=${post.id}">
-                ${post.title}
-              </a>
-            </h2>
-            <span class="date">${post.date}</span>
-            <p>${post.excerpt}</p>
-          `;
-
-          postsContainer.appendChild(el);
-        });
-
-        // 🔥 ACTIVER LES ANIMATIONS APRÈS INSERTION
-        activateFade();
+        if (searchInput) {
+          searchInput.addEventListener("input", e => {
+            const value = e.target.value.toLowerCase();
+            const filtered = posts.filter(p =>
+              p.title.toLowerCase().includes(value) ||
+              p.excerpt.toLowerCase().includes(value)
+            );
+            renderPosts(filtered);
+          });
+        }
       }
 
-      /* ======================
-         PAGE ARTICLE
-      ====================== */
+      /* ========= PAGE ARTICLE ========= */
       if (articleContainer) {
-        const params = new URLSearchParams(window.location.search);
-        const id = params.get("id");
+        const id = new URLSearchParams(window.location.search).get("id");
         const post = posts.find(p => p.id === id);
 
         if (!post) {
@@ -55,21 +46,36 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .catch(err => {
       console.error(err);
+      if (postsContainer) postsContainer.innerHTML = "<p>Erreur de chargement.</p>";
     });
+
+  function renderPosts(posts) {
+    postsContainer.innerHTML = "";
+
+    posts.forEach(post => {
+      const el = document.createElement("article");
+      el.className = "post-preview fade";
+      el.innerHTML = `
+        <h2><a href="article.html?id=${post.id}">${post.title}</a></h2>
+        <span class="date">${post.date}</span>
+        <p>${post.excerpt}</p>
+      `;
+      postsContainer.appendChild(el);
+    });
+
+    activateFade();
+  }
+
+  function activateFade() {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    });
+
+    document.querySelectorAll(".fade").forEach(el => observer.observe(el));
+  }
 });
-
-/* ======================
-   OBSERVER SCROLL
-====================== */
-function activateFade() {
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll(".fade").forEach(el => observer.observe(el));
-}
