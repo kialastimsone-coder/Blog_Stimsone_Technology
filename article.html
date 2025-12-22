@@ -1,72 +1,48 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Article</title>
 
   <link rel="stylesheet" href="./css/style.css">
 
   <script defer src="./js/theme.js"></script>
   <script defer src="./js/posts.js"></script>
+  <script defer src="./js/reactions.js"></script>
 </head>
 <body>
 
-  <button class="theme-toggle" aria-label="Changer le thème">🌙</button>
+<button class="theme-toggle">🌙</button>
 
-  <header class="header">
-    <h1></h1>
-    <p class="date"></p>
-  </header>
+<header class="header">
+  <h1></h1>
+  <p class="date"></p>
+</header>
 
-  <main class="container article"></main>
+<main class="container article"></main>
 
-  <div class="container">
-    <a href="./index.html" class="back-link">← Retour au blog</a>
-  </div>
+<section class="container reactions">
+  <button id="likeBtn">❤️ J’aime (<span id="likeCount">0</span>)</button>
+  <span>👀 <span id="viewCount">0</span> vues</span>
+</section>
 
-  <!-- GISCUS (OPTIONNEL – ACTIVER PLUS TARD) -->
-  <!--
-  <section class="container">
-    <script src="https://giscus.app/client.js"
-      data-repo="kialastimsone-coder/Blog_Stimsone_Technology"
-      data-repo-id="XXXX"
-      data-category="General"
-      data-category-id="XXXX"
-      data-mapping="pathname"
-      data-theme="preferred_color_scheme"
-      crossorigin="anonymous"
-      async>
-    </script>
-  </section>
-  -->
-  <main class="container article"></main>
-  articleContainer.innerHTML = `
-    <img src="${post.image}" class="cover-article" alt="${post.title}">
-    ${post.content}
-  `;
-  
-  <section class="container reactions">
-    <button id="likeBtn">❤️ J’aime (<span id="likeCount">0</span>)</button>
-    <p class="views">👀 Vues : <span id="viewCount">0</span></p>
-  </section>
-  
-  <section class="container comments">
-    <h3>Commentaires</h3>
-    <form id="commentForm">
-      <textarea id="commentInput" placeholder="Votre commentaire..." required></textarea>
-      <button type="submit">Publier</button>
-    </form>
-    <ul id="commentList"></ul>
-  </section>
-  
-  <script defer src="./js/reactions.js"></script>
+<section class="container comments">
+  <h3>Commentaires</h3>
+  <form id="commentForm">
+    <textarea id="commentInput" placeholder="Votre commentaire..." required></textarea>
+    <button type="submit">Publier</button>
+  </form>
+  <ul id="commentList"></ul>
+</section>
 
-  <footer class="footer">
-    <p>© 2025 – Stimsone SIVI</p>
-  </footer>
+<div class="container">
+  <a href="./index.html" class="back-link">← Retour au blog</a>
+</div>
+
+<footer class="footer">
+  © 2025 – Stimsone SIVI
+</footer>
 
 </body>
 </html>
-
-
