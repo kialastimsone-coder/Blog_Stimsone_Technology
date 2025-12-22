@@ -3,41 +3,43 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Créer un blog minimaliste</title>
+  <title>Article</title>
+
   <link rel="stylesheet" href="./css/style.css">
-  <meta name="description" content="Blog personnel minimaliste sur le web et la création">
-  <meta property="og:title" content="Mon Blog">
-  <meta property="og:description" content="Blog personnel moderne et minimaliste">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://github.com/kialastimsone-coder/Blog_Stimsone_Technology">
-  <script defer data-domain="Blog_Stimsone_Technology" src="https://plausible.io/js/script.js"></script>
+
+  <script defer src="./js/theme.js"></script>
+  <script defer src="./js/posts.js"></script>
 </head>
 <body>
-<div class="theme-toggle">🌙</div>
-<script src="./js/theme.js"></script>
+
+  <button class="theme-toggle" aria-label="Changer le thème">🌙</button>
 
   <header class="header">
-  <h1></h1>
-  <p class="date"></p>
-</header>
-  
-<main class="container article"></main>
-  
-<a href="index.html" class="back-link">← Retour au blog</a>
+    <h1></h1>
+    <p class="date"></p>
+  </header>
 
+  <main class="container article"></main>
+
+  <div class="container">
+    <a href="./index.html" class="back-link">← Retour au blog</a>
+  </div>
+
+  <!-- GISCUS (OPTIONNEL – ACTIVER PLUS TARD) -->
+  <!--
   <section class="container">
-     <script src="https://giscus.app/client.js"
-        data-repo="data-repo="kialastimsone-coder/Blog_Stimsone_Technology"
-"
-        data-repo-id="XXXX"
-        data-category="General"
-        data-category-id="XXXX"
-        data-mapping="pathname"
-        data-theme="preferred_color_scheme"
-        crossorigin="anonymous"
-        async>
-     </script>
+    <script src="https://giscus.app/client.js"
+      data-repo="kialastimsone-coder/Blog_Stimsone_Technology"
+      data-repo-id="XXXX"
+      data-category="General"
+      data-category-id="XXXX"
+      data-mapping="pathname"
+      data-theme="preferred_color_scheme"
+      crossorigin="anonymous"
+      async>
+    </script>
   </section>
+  -->
 
   <footer class="footer">
     <p>© 2025 – Stimsone SIVI</p>
@@ -45,9 +47,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
