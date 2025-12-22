@@ -41,6 +41,10 @@
   </section>
   -->
   <main class="container article"></main>
+  articleContainer.innerHTML = `
+    <img src="${post.image}" class="cover-article" alt="${post.title}">
+    ${post.content}
+  `;
   
   <section class="container reactions">
     <button id="likeBtn">❤️ J’aime (<span id="likeCount">0</span>)</button>
@@ -64,4 +68,5 @@
 
 </body>
 </html>
+
 
