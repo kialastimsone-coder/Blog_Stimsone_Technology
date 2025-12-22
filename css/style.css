@@ -230,3 +230,45 @@ body {
   border-color: var(--gray);
   box-shadow: 0 0 0 4px rgba(0,0,0,0.04);
 }
+
+.cover {
+  width: 100%;
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+}
+
+.cover-article {
+  width: 100%;
+  border-radius: var(--radius);
+  margin-bottom: 2rem;
+}
+
+.reactions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.reactions button {
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  cursor: pointer;
+}
+
+.comments textarea {
+  width: 100%;
+  min-height: 80px;
+  margin-bottom: 1rem;
+}
+
+.comments ul {
+  margin-top: 1rem;
+  list-style: none;
+}
+
+.comments li {
+  padding: 0.8rem;
+  border-bottom: 1px solid var(--border);
+}
