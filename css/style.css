@@ -221,3 +221,72 @@ body {
   font-size: 0.8rem;
   color: var(--gray);
 }
+
+/* =================================
+   DARK MODE FIX – COMMENTS & BUTTONS
+================================= */
+
+/* Textarea */
+.comments textarea {
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.comments textarea::placeholder {
+  color: var(--gray);
+}
+
+/* Publish button */
+.publish-btn {
+  background: var(--text);
+  color: var(--bg);
+}
+
+[data-theme="dark"] .publish-btn {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+/* Hover remains visible */
+.publish-btn:hover {
+  opacity: 0.85;
+}
+
+/* Comment text */
+.comments li p {
+  color: var(--text);
+}
+
+/* Comment date */
+.comments li span {
+  color: var(--gray);
+}
+
+/* =================================
+   IMAGE SIZE – PREMIUM LOOK
+================================= */
+
+/* Images in article list (index) */
+.post-preview img {
+  max-height: 220px;
+  object-fit: cover;
+}
+
+/* Image in article page */
+.article img {
+  max-height: 360px;
+  object-fit: cover;
+  margin-bottom: 2.5rem;
+}
+
+/* Center images nicely */
+.post-preview img,
+.article img {
+  width: 100%;
+  border-radius: var(--radius);
+  display: block;
+}
+
+
