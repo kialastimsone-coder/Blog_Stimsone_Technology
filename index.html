@@ -3,27 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mon Blog Personnel</title>
+  <title>Mon Blog</title>
+
   <link rel="stylesheet" href="./css/style.css">
+
   <meta name="description" content="Blog personnel minimaliste sur le web et la création">
-  <meta property="og:title" content="Mon Blog">
-  <meta property="og:description" content="Blog personnel moderne et minimaliste">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://github.com/kialastimsone-coder/Blog_Stimsone_Technology">
-  <script defer data-domain="Blog_Stimsone_Technology" src="https://plausible.io/js/script.js"></script>
+
+  <script defer src="./js/theme.js"></script>
+  <script defer src="./js/posts.js"></script>
 </head>
 <body>
+
   <header class="header">
     <h1>Mon Blog</h1>
     <p>Développement, réflexion & créativité</p>
   </header>
 
-  <div class="theme-toggle">🌙</div>
-  <script src="./js/theme.js"></script>  
-  <input type="search" id="search" class="search-input" placeholder="Rechercher un article">
+  <button class="theme-toggle" aria-label="Changer le thème">🌙</button>
+
+  <input
+    type="search"
+    id="search"
+    class="search-input"
+    placeholder="Rechercher un article"
+  >
 
   <main class="container posts"></main>
-  <script src="./js/posts.js"></script>
 
   <footer class="footer">
     <p>© 2025 – Stimsone SIVI</p>
@@ -31,6 +36,3 @@
 
 </body>
 </html>
-
-
-
