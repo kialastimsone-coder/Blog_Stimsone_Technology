@@ -23,16 +23,27 @@
 <main class="container article"></main>
 
 <section class="container reactions">
-  <button id="likeBtn">❤️ J’aime (<span id="likeCount">0</span>)</button>
-  <span>👀 <span id="viewCount">0</span> vues</span>
+  <button id="likeBtn" class="like-btn">
+    ❤️ <span id="likeCount">0</span>
+  </button>
+  <span class="views">👀 <span id="viewCount">0</span> vues</span>
 </section>
 
 <section class="container comments">
-  <h3>Commentaires</h3>
+  <h3>Laisser un commentaire</h3>
+
   <form id="commentForm">
-    <textarea id="commentInput" placeholder="Votre commentaire..." required></textarea>
-    <button type="submit">Publier</button>
+    <textarea
+      id="commentInput"
+      placeholder="Exprimez votre avis..."
+      required
+    ></textarea>
+
+    <button type="submit" class="publish-btn">
+      Publier le commentaire
+    </button>
   </form>
+
   <ul id="commentList"></ul>
 </section>
 
@@ -46,3 +57,4 @@
 
 </body>
 </html>
+
