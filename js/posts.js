@@ -4,85 +4,49 @@ document.addEventListener("DOMContentLoaded", () => {
   const articleContainer = document.querySelector(".article");
   const titleEl = document.querySelector(".header h1");
   const dateEl = document.querySelector(".date");
-  const searchInput = document.getElementById("search");
+  const search = document.getElementById("search");
 
   fetch("./posts.json")
-    .then(res => {
-      if (!res.ok) throw new Error("posts.json introuvable");
-      return res.json();
-    })
+    .then(res => res.json())
     .then(posts => {
 
-      /* ========= PAGE INDEX ========= */
       if (postsContainer) {
-        renderPosts(posts);
-          el.innerHTML = `
-            <img src="${post.image}" class="cover" alt="${post.title}">
-            <h2><a href="article.html?id=${post.id}">${post.title}</a></h2>
-            <span class="date">${post.date}</span>
-            <p>${post.excerpt}</p>
-          `;
-        
-        if (searchInput) {
-          searchInput.addEventListener("input", e => {
-            const value = e.target.value.toLowerCase();
-            const filtered = posts.filter(p =>
-              p.title.toLowerCase().includes(value) ||
-              p.excerpt.toLowerCase().includes(value)
-            );
-            renderPosts(filtered);
-          });
-        }
+        render(posts);
+
+        search.addEventListener("input", e => {
+          const value = e.target.value.toLowerCase();
+          render(posts.filter(p =>
+            p.title.toLowerCase().includes(value) ||
+            p.excerpt.toLowerCase().includes(value)
+          ));
+        });
       }
 
-      /* ========= PAGE ARTICLE ========= */
       if (articleContainer) {
-        const id = new URLSearchParams(window.location.search).get("id");
+        const id = new URLSearchParams(location.search).get("id");
         const post = posts.find(p => p.id === id);
-
-        if (!post) {
-          articleContainer.innerHTML = "<p>Article introuvable.</p>";
-          return;
-        }
+        if (!post) return;
 
         titleEl.textContent = post.title;
         dateEl.textContent = post.date;
-        articleContainer.innerHTML = post.content;
+        articleContainer.innerHTML = `
+          <img src="${post.image}">
+          ${post.content}
+        `;
       }
-    })
-    .catch(err => {
-      console.error(err);
-      if (postsContainer) postsContainer.innerHTML = "<p>Erreur de chargement.</p>";
+
+      function render(list) {
+        postsContainer.innerHTML = "";
+        list.forEach(p => {
+          postsContainer.innerHTML += `
+            <article class="post-preview">
+              <img src="${p.image}">
+              <h2><a href="article.html?id=${p.id}">${p.title}</a></h2>
+              <span class="date">${p.date}</span>
+              <p>${p.excerpt}</p>
+            </article>
+          `;
+        });
+      }
     });
-
-  function renderPosts(posts) {
-    postsContainer.innerHTML = "";
-
-    posts.forEach(post => {
-      const el = document.createElement("article");
-      el.className = "post-preview fade";
-      el.innerHTML = `
-        <h2><a href="article.html?id=${post.id}">${post.title}</a></h2>
-        <span class="date">${post.date}</span>
-        <p>${post.excerpt}</p>
-      `;
-      postsContainer.appendChild(el);
-    });
-
-    activateFade();
-  }
-
-  function activateFade() {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    });
-
-    document.querySelectorAll(".fade").forEach(el => observer.observe(el));
-  }
 });
-
