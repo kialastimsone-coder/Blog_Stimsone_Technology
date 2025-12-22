@@ -1,118 +1,133 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const id = new URLSearchParams(location.search).get("id");
-  if (!id) return;
 
-  const isAdmin = localStorage.getItem("isAdmin") === "true";
+  const params = new URLSearchParams(window.location.search);
+  const articleId = params.get("id");
 
-  /* =========================
+  if (!articleId) return;
+
+  /* ======================
      VUES
-  ========================= */
-  const viewsKey = `views_${id}`;
-  let views = Number(localStorage.getItem(viewsKey) || 0) + 1;
-  localStorage.setItem(viewsKey, views);
-  document.getElementById("viewCount").textContent = views;
+  ====================== */
+  const viewKey = `views-${articleId}`;
+  const viewsEl = document.getElementById("viewCount");
 
-  /* =========================
+  let views = Number(localStorage.getItem(viewKey)) || 0;
+  views++;
+  localStorage.setItem(viewKey, views);
+  if (viewsEl) viewsEl.textContent = views;
+
+  /* ======================
      LIKES (UNIQUE)
-  ========================= */
-  const likesKey = `likes_${id}`;
-  const likedKey = `liked_${id}`;
-
-  let likes = Number(localStorage.getItem(likesKey) || 0);
-  const liked = localStorage.getItem(likedKey) === "true";
-
+  ====================== */
   const likeBtn = document.getElementById("likeBtn");
-  const likeCount = document.getElementById("likeCount");
+  const likeCountEl = document.getElementById("likeCount");
 
-  likeCount.textContent = likes;
+  const likeKey = `likes-${articleId}`;
+  const likedKey = `liked-${articleId}`;
 
-  if (liked) {
+  let likes = Number(localStorage.getItem(likeKey)) || 0;
+  const hasLiked = localStorage.getItem(likedKey);
+
+  likeCountEl.textContent = likes;
+
+  if (hasLiked) {
     likeBtn.classList.add("liked");
     likeBtn.disabled = true;
   }
 
   likeBtn.addEventListener("click", () => {
-    if (liked) return;
+    if (localStorage.getItem(likedKey)) return;
 
     likes++;
-    localStorage.setItem(likesKey, likes);
+    localStorage.setItem(likeKey, likes);
     localStorage.setItem(likedKey, "true");
 
-    likeCount.textContent = likes;
+    likeCountEl.textContent = likes;
     likeBtn.classList.add("liked");
     likeBtn.disabled = true;
+
+    likeBtn.animate(
+      [{ transform: "scale(1)" }, { transform: "scale(1.3)" }, { transform: "scale(1)" }],
+      { duration: 400 }
+    );
   });
 
-  /* =========================
-     COMMENTAIRES + ADMIN
-  ========================= */
-  const commentsKey = `comments_${id}`;
-  const list = document.getElementById("commentList");
+  /* ======================
+     COMMENTAIRES
+  ====================== */
   const form = document.getElementById("commentForm");
   const input = document.getElementById("commentInput");
+  const list = document.getElementById("commentList");
 
-  let comments = JSON.parse(localStorage.getItem(commentsKey) || "[]");
-  comments.forEach(renderComment);
+  const commentKey = `comments-${articleId}`;
+  const isAdmin = localStorage.getItem("isAdmin") === "true";
 
-  form.addEventListener("submit", e => {
-    e.preventDefault();
+  let comments = JSON.parse(localStorage.getItem(commentKey)) || [];
+
+  function renderComments() {
+    list.innerHTML = "";
+
+    comments.forEach((comment, index) => {
+      const li = document.createElement("li");
+      li.className = "comment";
+
+      li.innerHTML = `
+        <p>${comment.text}</p>
+        <small>${comment.date}</small>
+      `;
+
+      if (isAdmin) {
+        const actions = document.createElement("div");
+        actions.className = "admin-actions";
+
+        const del = document.createElement("button");
+        del.textContent = "Supprimer";
+        del.onclick = () => {
+          comments.splice(index, 1);
+          saveComments();
+        };
+
+        const reply = document.createElement("button");
+        reply.textContent = "Répondre";
+        reply.onclick = () => {
+          const r = prompt("Réponse admin :");
+          if (r) {
+            comments.push({
+              text: `🛠️ Admin : ${r}`,
+              date: new Date().toLocaleString()
+            });
+            saveComments();
+          }
+        };
+
+        actions.append(reply, del);
+        li.appendChild(actions);
+      }
+
+      list.appendChild(li);
+    });
+  }
+
+  function saveComments() {
+    localStorage.setItem(commentKey, JSON.stringify(comments));
+    renderComments();
+  }
+
+  /* 🔥 CORRECTION MAJEURE ICI */
+  form.addEventListener("submit", (event) => {
+    event.preventDefault(); // ⬅️ EMPÊCHE LE RECHARGEMENT
+
     const text = input.value.trim();
-    if (text.length < 3) return;
+    if (!text) return;
 
-    const comment = {
-      id: crypto.randomUUID(),
+    comments.push({
       text,
-      date: new Date().toLocaleDateString("fr-FR"),
-      replies: []
-    };
+      date: new Date().toLocaleString()
+    });
 
-    comments.push(comment);
-    save();
-    renderComment(comment);
     input.value = "";
+    saveComments();
   });
 
-  function save() {
-    localStorage.setItem(commentsKey, JSON.stringify(comments));
-  }
-
-  function renderComment(comment) {
-    const li = document.createElement("li");
-    li.className = "comment";
-
-    li.innerHTML = `
-      <p>${comment.text}</p>
-      <span>${comment.date}</span>
-
-      <div class="replies">
-        ${comment.replies.map(r => `<div class="reply">↳ ${r}</div>`).join("")}
-      </div>
-
-      ${isAdmin ? `
-        <div class="admin-actions">
-          <button class="reply-btn">Répondre</button>
-          <button class="delete-btn">Supprimer</button>
-        </div>
-      ` : ""}
-    `;
-
-    if (isAdmin) {
-      li.querySelector(".reply-btn").onclick = () => {
-        const reply = prompt("Réponse administrateur :");
-        if (!reply) return;
-        comment.replies.push(reply);
-        save();
-        li.querySelector(".replies").innerHTML += `<div class="reply">↳ ${reply}</div>`;
-      };
-
-      li.querySelector(".delete-btn").onclick = () => {
-        if (!confirm("Supprimer ce commentaire ?")) return;
-        comments = comments.filter(c => c.id !== comment.id);
-        save();
-        li.remove();
-      };
-    }
-
-    list.appendChild(li);
-  }
+  renderComments();
 });
