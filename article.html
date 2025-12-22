@@ -40,6 +40,23 @@
     </script>
   </section>
   -->
+  <main class="container article"></main>
+  
+  <section class="container reactions">
+    <button id="likeBtn">❤️ J’aime (<span id="likeCount">0</span>)</button>
+    <p class="views">👀 Vues : <span id="viewCount">0</span></p>
+  </section>
+  
+  <section class="container comments">
+    <h3>Commentaires</h3>
+    <form id="commentForm">
+      <textarea id="commentInput" placeholder="Votre commentaire..." required></textarea>
+      <button type="submit">Publier</button>
+    </form>
+    <ul id="commentList"></ul>
+  </section>
+  
+  <script defer src="./js/reactions.js"></script>
 
   <footer class="footer">
     <p>© 2025 – Stimsone SIVI</p>
@@ -47,3 +64,4 @@
 
 </body>
 </html>
+
