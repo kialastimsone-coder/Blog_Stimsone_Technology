@@ -36,6 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       function render(list) {
+        <img src="${p.image}" loading="lazy" alt="${p.title}">
         postsContainer.innerHTML = "";
         list.forEach(p => {
           postsContainer.innerHTML += `
@@ -50,3 +51,4 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 });
+
