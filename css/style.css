@@ -326,4 +326,41 @@ body {
   }
 }
 
+/* ===============================
+   COMMENTS ADMIN
+================================ */
+.comment {
+  padding: 1.2rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.replies {
+  margin-top: 0.6rem;
+}
+
+.reply {
+  font-size: 0.9rem;
+  color: var(--gray);
+  margin-left: 1rem;
+}
+
+.admin-actions {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 0.6rem;
+}
+
+.admin-actions button {
+  font-size: 0.8rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  cursor: pointer;
+}
+
+.admin-actions button:hover {
+  opacity: 0.8;
+}
+
 
