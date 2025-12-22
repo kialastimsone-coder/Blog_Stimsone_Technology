@@ -289,4 +289,41 @@ body {
   display: block;
 }
 
+/* ===============================
+   LIKE ANIMATION
+================================ */
+.like-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.like-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.6) 10%, transparent 40%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.like-btn:hover::after {
+  opacity: 1;
+}
+
+.like-btn.liked {
+  animation: likePulse 0.6s ease;
+}
+
+@keyframes likePulse {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 
