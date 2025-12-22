@@ -1,46 +1,45 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const id = new URLSearchParams(window.location.search).get("id");
+  const id = new URLSearchParams(location.search).get("id");
   if (!id) return;
 
-  /* ========= VUES ========= */
   const viewsKey = `views_${id}`;
-  let views = Number(localStorage.getItem(viewsKey) || 0);
-  views++;
-  localStorage.setItem(viewsKey, views);
-  document.getElementById("viewCount").textContent = views;
-
-  /* ========= LIKES ========= */
-  const likeKey = `likes_${id}`;
-  let likes = Number(localStorage.getItem(likeKey) || 0);
-  document.getElementById("likeCount").textContent = likes;
-
-  document.getElementById("likeBtn").addEventListener("click", () => {
-    likes++;
-    localStorage.setItem(likeKey, likes);
-    document.getElementById("likeCount").textContent = likes;
-  });
-
-  /* ========= COMMENTAIRES ========= */
+  const likesKey = `likes_${id}`;
   const commentsKey = `comments_${id}`;
+
+  const viewsEl = document.getElementById("viewCount");
+  const likeEl = document.getElementById("likeCount");
+
+  let views = Number(localStorage.getItem(viewsKey) || 0) + 1;
+  localStorage.setItem(viewsKey, views);
+  viewsEl.textContent = views;
+
+  let likes = Number(localStorage.getItem(likesKey) || 0);
+  likeEl.textContent = likes;
+
+  document.getElementById("likeBtn").onclick = () => {
+    likes++;
+    localStorage.setItem(likesKey, likes);
+    likeEl.textContent = likes;
+  };
+
   const list = document.getElementById("commentList");
   const form = document.getElementById("commentForm");
   const input = document.getElementById("commentInput");
 
   const comments = JSON.parse(localStorage.getItem(commentsKey) || "[]");
-  comments.forEach(addComment);
+  comments.forEach(add);
 
-  form.addEventListener("submit", e => {
+  form.onsubmit = e => {
     e.preventDefault();
     const text = input.value.trim();
     if (!text) return;
-
     comments.push(text);
     localStorage.setItem(commentsKey, JSON.stringify(comments));
-    addComment(text);
+    add(text);
     input.value = "";
-  });
+  };
 
-  function addComment(text) {
+  function add(text) {
     const li = document.createElement("li");
     li.textContent = text;
     list.appendChild(li);
