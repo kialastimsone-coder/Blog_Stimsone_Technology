@@ -1,10 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   const toggle = document.querySelector(".theme-toggle");
-  if (!toggle) return;
+  const saved = localStorage.getItem("theme");
 
-  const savedTheme = localStorage.getItem("theme");
-  if (savedTheme) {
-    document.documentElement.setAttribute("data-theme", savedTheme);
+  if (saved) {
+    document.documentElement.setAttribute("data-theme", saved);
   }
 
   toggle.addEventListener("click", () => {
