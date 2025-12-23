@@ -363,4 +363,68 @@ body {
   opacity: 0.8;
 }
 
+/* =================================
+   AUTHOR BOX
+================================= */
+
+.author-box {
+  display: flex;
+  gap: 1.5rem;
+  padding: 2rem;
+  margin-top: 4rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  align-items: center;
+}
+
+.author-avatar img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.author-content h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+}
+
+.author-name {
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+.author-bio {
+  color: var(--gray);
+  font-size: 0.95rem;
+  margin-bottom: 0.8rem;
+}
+
+.author-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.author-links a {
+  font-size: 0.9rem;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.author-links a:hover {
+  opacity: 0.7;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .author-box {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
 
