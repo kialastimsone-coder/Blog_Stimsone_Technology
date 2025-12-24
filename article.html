@@ -12,7 +12,6 @@
 
   <script defer src="./js/theme.js"></script>
   <script defer src="./js/posts.js"></script>
-  <script defer src="./js/reactions.js"></script>
 </head>
 <body>
 
@@ -24,55 +23,27 @@
 </header>
 
 <main class="container article"></main>
+
 <section class="container author-box">
   <div class="author-avatar">
-    <img src="SIVI Stimsone.JPG" alt="Photo de l’auteur">
+    <img src="./images/author.jpg" alt="Photo de l’auteur">
   </div>
 
   <div class="author-content">
     <h3>À propos de l’auteur</h3>
     <p class="author-name">Stimsone SIVI</p>
     <p class="author-bio">
-      Ingénieur en Génie électrique spécialisé aux énergies renouvelables.<br>
-      Programmeur et Développeur web front-end, passionné aux technologies nouvelles et dévéloppement personnel.<br>
-      Data Analyst, Machine Learning et gestion de projets
+      Ingénieur en génie électrique, développeur web front-end, passionné par
+      les nouvelles technologies, la data et le développement personnel.
     </p>
 
     <div class="author-links">
-      <a href="https://github.com/kialastimsone-coder" target="_blank">GitHub</a>
+      <a href="mailto:contact@kialastimsone.com">Email</a>
       <a href="https://www.linkedin.com/in/stimsone-sivi-51496430b/" target="_blank">LinkedIn</a>
-      <a href="kialastimsone.com">Email</a>
-      <a href="https://kialastimsone-coder.github.io/stimsone/">Portfolio</a>
-
+      <a href="https://github.com/kialastimsone-coder" target="_blank">GitHub</a>
+      <a href="https://kialastimsone-coder.github.io/stimsone/" target="_blank">Portfolio</a>
     </div>
   </div>
-</section>
-
-<section class="container reactions">
-  <button id="likeBtn" class="like-btn">
-    ❤️ <span id="likeCount">0</span>
-  </button>
-  <span class="views">
-    👀 <span id="viewCount">0</span> vues
-  </span>
-</section>
-
-<section class="container comments">
-  <h3>Laisser un commentaire</h3>
-
-  <form id="commentForm">
-    <textarea
-      id="commentInput"
-      placeholder="Exprimez votre avis..."
-      required
-    ></textarea>
-
-    <button type="submit" class="publish-btn">
-      Publier le commentaire
-    </button>
-  </form>
-
-  <ul id="commentList"></ul>
 </section>
 
 <div class="container">
@@ -85,9 +56,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
