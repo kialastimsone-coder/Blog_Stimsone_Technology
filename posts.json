@@ -4,24 +4,8 @@
     "title": "Tech et Épanouissement",
     "date": "24-12-2025",
     "excerpt": "L'équilibre parfait : Gérer sa vie pro et perso à l'ère du numérique",
-    "image": "./images/apprendre.jpg",
+    "image": "./images/technologie.jpg",
     "content": "<pLe défi constant de concilier vie professionnelle et vie personnelle face à la connexion permanente.</p><p>Comment la technologie, souvent perçue comme une source de déséquilibre, peut en réalité devenir une alliée.</p>"
   },
-  {
-    "id": "simplicite",
-    "title": "Pourquoi la simplicité est puissante",
-    "date": "2025-12-05",
-    "excerpt": "Moins de bruit, plus d’impact.",
-    "image": "./images/developpement personnel.jpg",
-    "content": "<p>Le minimalisme améliore la lisibilité et la concentration.</p>"
-  },
-  {
-    "id": "technologie",
-    "title": "La technologie en 2026",
-    "date": "2025-12-05",
-    "excerpt": "Le monde d'aujourd'hui",
-    "image": "./images/technologie.jpg",
-    "content": "<p>Apprendre le numérique vous ouvre des portes.</p>"
-  }
-]
+  
 
