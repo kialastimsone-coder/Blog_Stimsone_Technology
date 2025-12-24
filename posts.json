@@ -1,11 +1,13 @@
 [
   {
-    "id": "L'équilibre entre la vie pro et la vie perso à l'ère du numérique",
+    "id": "equilibre-vie-pro-perso-numerique",
     "title": "Tech et Épanouissement",
-    "date": "24-12-2025",
-    "excerpt": "L'équilibre parfait : Gérer sa vie pro et perso à l'ère du numérique",
+    "date": "24 décembre 2025",
+    "excerpt": "Trouver l'équilibre entre vie professionnelle et personnelle à l'ère du numérique.",
     "image": "./images/technologie.jpg",
-    "content": "<p>Le défi constant de concilier vie professionnelle et vie personnelle face à la connexion permanente.</p><p>Comment la technologie, souvent perçue comme une source de déséquilibre, peut en réalité devenir une alliée.</p>"
-  },
+    "content": "<p>Le défi constant de concilier vie professionnelle et vie personnelle face à la connexion permanente est devenu central.</p><p>La technologie, souvent perçue comme une source de déséquilibre, peut pourtant devenir une alliée si elle est utilisée consciemment.</p>"
+  }
 ]
+
+
 
