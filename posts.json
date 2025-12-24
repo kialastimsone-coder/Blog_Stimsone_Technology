@@ -1,11 +1,11 @@
 [
   {
-    "id": "blog-minimaliste",
-    "title": "Créer un blog minimaliste",
-    "date": "2025-12-10",
-    "excerpt": "Créer un blog élégant avec HTML, CSS et JS.",
+    "id": "L'équilibre entre la vie pro et la vie perso à l'ère du numérique",
+    "title": "Tech et Épanouissement",
+    "date": "24-12-2025",
+    "excerpt": "L'équilibre parfait : Gérer sa vie pro et perso à l'ère du numérique",
     "image": "./images/apprendre.jpg",
-    "content": "<p>Un blog minimaliste se concentre sur l’essentiel.</p><p>GitHub Pages est parfait pour cela.</p>"
+    "content": "<pLe défi constant de concilier vie professionnelle et vie personnelle face à la connexion permanente.</p><p>Comment la technologie, souvent perçue comme une source de déséquilibre, peut en réalité devenir une alliée.</p>"
   },
   {
     "id": "simplicite",
@@ -24,3 +24,4 @@
     "content": "<p>Apprendre le numérique vous ouvre des portes.</p>"
   }
 ]
+
